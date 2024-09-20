@@ -1,0 +1,62 @@
+<template>
+    <lightning-card title="Available Attendees" icon-name="standard:people">
+      <template if:true={attendees}>
+        <template for:each={attendees} for:item="attendee">
+          <lightning-tile
+            key={attendee.Id}
+            icon-name="standard:people"
+            fallback-icon-name="standard:user"
+            class="slds-var-p-around_medium"
+          >
+          <div class="slds-grid slds-gutters slds-wrap slds-var-m-bottom_small">
+              <!-- Avatar Section -->
+              <div class="slds-col slds-size_1-of-6 slds-align_absolute-center slds-var-m-bottom_x-small">
+                  <lightning-avatar
+                      variant="circle"
+                      src="https://www.lightningdesignsystem.com/assets/images/avatar2.jpg"
+                      size="Large"
+                      fallback-icon-name="standard:user"
+                      alternative-text="attendee Avatar"
+                      
+                  ></lightning-avatar>
+              </div>
+  
+              <!-- attendee Details Section -->
+              <div class="slds-col slds-size_5-of-6">
+                  <p><strong>{attendee.Name}</strong> </p>
+                  <p>
+                      <lightning-icon 
+                          icon-name="utility:email" 
+                          alternative-text="Email Icon" 
+                          size="x-small" 
+                          class="slds-m-right_x-small">
+                      </lightning-icon> 
+                      {attendee.Email__c}
+                  </p>
+                  <p><strong>Phone:</strong> {attendee.Phone__c}</p>
+              </div>
+          </div>
+  
+            <!-- Add attendee Button -->
+            <lightning-button
+              label="+ Add attendee"
+              data-id={attendee.Id}
+              data-name={attendee.Name}
+              variant="brand"
+              size="small"
+              onclick={handleAddAttendee}
+              class="slds-var-m-top_small slds-var-m-left_small"
+            >
+            </lightning-button>
+          </lightning-tile>
+        </template>
+      </template>
+      <template if:true={noAttendees}>
+        <p class="slds-var-m-around_small">No Attendees</p>
+      </template>
+      <template if:true={error}>
+        <p class="slds-text-color_error">Error: {error.message}</p>
+      </template>
+    </lightning-card>
+  </template>
+  

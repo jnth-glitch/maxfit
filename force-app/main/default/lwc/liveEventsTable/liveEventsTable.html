@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Live Events" icon-name="custom:custom63">
+        <lightning-input type="search" label="Search "></lightning-input>
+        <lightning-datatable
+            key-field="Id"
+            data={events}
+            columns={columns}
+            hide-checkbox-column="true"
+            onrowaction={handleRowAction}>
+        </lightning-datatable>
+        <template if:true={error}>
+            <p class="slds-text-color_error">{error}</p>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,10 @@
+.event-details {
+    margin-bottom: 15px;
+}
+.event-details h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.event-details p {
+    margin: 5px 0;
+}

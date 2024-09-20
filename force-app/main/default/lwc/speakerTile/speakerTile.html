@@ -1,0 +1,47 @@
+<template>
+  <lightning-card title="Speakers List" icon-name="standard:people">
+    <template if:true={speakers}>
+      <template for:each={speakers} for:item="speaker">
+        <lightning-tile
+          key={speaker.Id}
+          type="media"
+          class="slds-var-p-left_medium"
+        >
+          <lightning-avatar
+            slot="media"
+            src="https://www.lightningdesignsystem.com/assets/images/avatar1.pg"
+            fallback-icon-name="utility:profile_alt"
+            size="large"
+            variant="circle"
+            class="slds-m-top_small"
+          ></lightning-avatar>
+          <h1><b>{speaker.Name}</b></h1>
+          <p>
+            <lightning-icon
+              icon-name="utility:email"
+              alternative-text="Email"
+              title="Email"
+              size="x-small"
+            >
+            </lightning-icon>
+            {speaker.Email__c}
+          </p>
+          <p>
+            <lightning-icon
+              icon-name="utility:call"
+              alternative-text="Phone"
+              title="Phone"
+              size="x-small"
+            >
+            </lightning-icon>
+            {speaker.Phone__c}
+          </p>
+        </lightning-tile>
+      </template>
+    </template>
+
+    <template if:true={error}>
+      <p class="slds-text-color_error">Error: {error.message}</p>
+    </template>
+  </lightning-card>
+</template>

@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="Custom Lookup">
+        <div class="slds-m-around_medium">
+            <c-custom-lookup
+                label="Events"
+                placeholder="Search Events..."
+                object-api-name="Event__c"
+                onselect={handleAccountSelect}>
+            </c-custom-lookup>
+        </div>
+    </lightning-card>
+</template>

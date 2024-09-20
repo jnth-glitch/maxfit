@@ -1,0 +1,69 @@
+<template>
+    <lightning-card title="Attendee Event Details">
+        <template if:true={upcomingEvents.length}>
+            <lightning-accordion allow-multiple-sections-open>
+                <lightning-accordion-section label="Upcoming Events">
+                    <template for:each={upcomingEvents} for:item="event">
+                        <div key={event.Id} class="event-details">
+                            <lightning-layout>
+                                <lightning-layout-item size="12">
+                                    <h3><lightning-icon icon-name="utility:event"></lightning-icon>{event.Event_Name__c}</h3>
+                                    <p>Start Date: {event.Start_Date_Time__c}</p>
+                                    <p>End Date: {event.End_Date_Time__c}</p>
+                                    <p><lightning-icon icon-name="utility:checkin" size="small"></lightning-icon> {event.Location__r.Name}</p>
+                                    <p>Speakers: 
+                                        <template for:each={event.Event_Speakers__r} for:item="speaker">
+                                            {speaker.Speaker__r.Name}
+                                        </template>
+                                    </p>
+                                    <p>Attendees: 
+                                        <template for:each={event.Event_Attendees__r} for:item="attendee">
+                                            {attendee.Attendee__r.Name}
+                                        </template>
+                                    </p>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                    </template>
+                </lightning-accordion-section>
+
+                <lightning-accordion-section label="Past Events">
+                    <template for:each={pastEvents} for:item="event">
+                        <div key={event.Id} class="event-details">
+                            <lightning-layout>
+                                <lightning-layout-item size="12">
+                                    <h3><lightning-icon icon-name="utility:event"></lightning-icon>{event.Event_Name__c}</h3>
+                                    <p>Start: {event.Start_Date_Time__c}</p>
+                                    <p>End: {event.End_Date_Time__c}</p>
+                                    <p>Location: {event.Location__r.Name}</p>
+                                    <p>Speakers: 
+                                        <template for:each={event.Event_Speakers__r} for:item="speaker">
+                                            {speaker.Speaker__r.Name}
+                                        </template>
+                                    </p>
+                                    <p>Attendees: 
+                                        <template for:each={event.Event_Attendees__r} for:item="attendee">
+                                            {attendee.Attendee__r.Name}
+                                        </template>
+                                    </p>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                    </template>
+                </lightning-accordion-section>
+            </lightning-accordion>
+        </template>
+
+        <template if:false={upcomingEvents.length}>
+            <p>No Upcoming Events Found.</p>
+        </template>
+
+        <template if:false={pastEvents.length}>
+            <p>No Past Events Found.</p>
+        </template>
+
+        <template if:true={error}>
+            <p>Error: {error.message}</p>
+        </template>
+    </lightning-card>
+</template>

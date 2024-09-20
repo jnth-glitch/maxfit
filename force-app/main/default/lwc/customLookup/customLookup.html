@@ -1,0 +1,40 @@
+<template>
+    <div class="slds-form-element">
+        <label class="slds-form-element__label" for="lookupInput">{label}</label>
+        <div class="slds-form-element__control">
+            <div class="slds-combobox_container slds-has-inline-listbox">
+                <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click">
+                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                        <input type="text" class="slds-input" id="lookupInput" placeholder={placeholder}
+                            oninput={handleInputChange} 
+                            onchange={handleInputChange} 
+                            aria-autocomplete="list"
+                            aria-controls="lookup-listbox"
+                            role="combobox"
+                            autocomplete="off"/>
+                        <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right"
+                            title="Search">
+                            <lightning-icon icon-name="utility:search" alternative-text="Search"></lightning-icon>
+                        </button>
+                    </div>
+                    <div if:true={showDropdown} class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid">
+                        <ul class="slds-listbox slds-listbox_vertical slds-dropdown__list" role="listbox" id="lookup-listbox">
+                            <template for:each={searchResults} for:item="result">
+                                <li key={result.Id} role="presentation" class="slds-listbox__item">
+                                    <div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_center" role="option" 
+                                        tabindex="0" 
+                                        data-id={result.Id} 
+                                        onclick={handleOptionSelect}>
+                                        <span class="slds-media__body">
+                                            <span class="slds-truncate" title={result.Name}>{result.Name}</span>
+                                        </span>
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

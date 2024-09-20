@@ -1,0 +1,58 @@
+<template>
+  <lightning-card title="Available Speakers" icon-name="standard:people">
+    <template if:true={speakers}>
+      <template for:each={speakers} for:item="speaker">
+        <lightning-tile
+          key={speaker.Id}
+          icon-name="standard:people"
+          fallback-icon-name="standard:user"
+          class="slds-var-p-around_medium"
+        >
+        <div class="slds-grid slds-gutters slds-wrap slds-var-m-bottom_small">
+            <!-- Avatar Section -->
+            <div class="slds-col slds-size_1-of-6 slds-align_absolute-center slds-var-m-bottom_x-small">
+                <lightning-avatar
+                    variant="circle"
+                    src="https://www.lightningdesignsystem.com/assets/images/avatar2.jpg"
+                    size="Large"
+                    fallback-icon-name="standard:user"
+                    alternative-text="Speaker Avatar"
+                    
+                ></lightning-avatar>
+            </div>
+
+            <!-- Speaker Details Section -->
+            <div class="slds-col slds-size_5-of-6">
+                <p><strong>{speaker.Name}</strong> </p>
+                <p>
+                    <lightning-icon 
+                        icon-name="utility:email" 
+                        alternative-text="Email Icon" 
+                        size="x-small" 
+                        class="slds-m-right_x-small">
+                    </lightning-icon> 
+                    {speaker.Email__c}
+                </p>
+                <p><strong>Phone:</strong> {speaker.Phone__c}</p>
+            </div>
+        </div>
+
+          <!-- Add Speaker Button -->
+          <lightning-button
+            label="+ Add Speaker"
+            data-id={speaker.Id}
+            data-name={speaker.Name}
+            variant="brand"
+            size="small"
+            onclick={handleAddSpeaker}
+            class="slds-var-m-top_small slds-var-m-left_small"
+          >
+          </lightning-button>
+        </lightning-tile>
+      </template>
+    </template>
+    <template if:true={error}>
+      <p class="slds-text-color_error">Error: {error.message}</p>
+    </template>
+  </lightning-card>
+</template>
